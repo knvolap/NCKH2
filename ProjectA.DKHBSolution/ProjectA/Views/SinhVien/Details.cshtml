@@ -1,0 +1,123 @@
+﻿@model ProjectA.ViewModel.XetHocBongViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Chi Tiết</h1>
+<h4 class="my-4">Sinh Viên</h4>
+<hr />
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.TenSinhVien)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TenSinhVien)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdLop)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IdLop)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PasswordSv)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PasswordSv)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NgaySinh)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NgaySinh)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SoDienThoai)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SoDienThoai)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GioiTinh)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GioiTinh)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DiaChi)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DiaChi)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    @*<dl class="row">
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.TenSinhVien)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.TenSinhVien)
+            </dd>
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.IdLop)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.IdLop)
+            </dd>
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.PasswordSv)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.PasswordSv)
+            </dd>
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.NgaySinh)
+            </dd>
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.SoDienThoai)
+            </dd>
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.GioiTinh)
+            </dd>
+            <dt class="col-sm-12">
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+            <dd class="col-sm-12">
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+        </dl>*@
+</div>
+<div class="mt-5">
+    <a class="btn btn-outline-primary" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Quay lại trang trước</a>
+</div>

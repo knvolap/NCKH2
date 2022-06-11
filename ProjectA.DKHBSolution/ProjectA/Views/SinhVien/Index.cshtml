@@ -1,0 +1,133 @@
+﻿@model IEnumerable<ProjectA.ViewModel.XetHocBongViewModel>
+@{Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Active"] = "SV";}
+
+@*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <div class="container">
+        <form method="post" asp-controller="SinhVien" asp-action="Index" enctype="multipart/form-data"> 
+            <input type="file" name="file"/>
+            <button type="submit">Import form excel</button>
+        </form>
+    </div>
+</div>*@
+<h2>Bảng điểm</h2>
+<a asp-controller="SinhVien" class="btn btn-outline-primary my-3" asp-action="Create"><i class="fas fa-plus"></i> Tạo bảng điểm mới</a>
+<div class="table-responsive">
+    <table class="table align-middle table-bordered">
+        <thead class="table-dark table align-middle">
+            <tr class="align-middle">
+                <th class="align-middle">@Html.DisplayNameFor(model => model.IdSinhVien)</th>
+                <th class="align-middle">@Html.DisplayNameFor(model => model.TenSinhVien)</th>
+                <th class="align-middle">@Html.DisplayNameFor(model => model.IdHocKy)</th>
+                <th class="align-middle">@Html.DisplayNameFor(model => model.IdLop)</th>
+                <th class="align-middle">@Html.DisplayNameFor(model => model.DiemThang4)</th>
+                <th class="align-middle">@Html.DisplayNameFor(model => model.DiemThang10)</th>
+                <th class="align-middle">@Html.DisplayNameFor(model => model.DiemRenLuyen)</th>
+                <th class="align-middle">@Html.DisplayNameFor(model => model.XepLoai)</th>
+            </tr>
+        </thead>
+        <tbody class="align-middle">
+            @foreach (var item in Model)
+            {
+            <tr class="align-middle">
+                <td class="align-middle">@item.IdSinhVien</td>
+                <td class="align-middle">@item.TenSinhVien</td>
+                <td class="align-middle">@item.IdHocKy</td>
+                <td class="align-middle">@item.IdLop</td>
+                <td class="align-middle">@item.DiemThang4</td>
+                <td class="align-middle">@item.DiemThang10</td>
+                <td class="align-middle">@item.DiemRenLuyen</td>
+                <td class="align-middle">@item.XepLoai</td>
+                <td class="align-middle">
+                    <a asp-action="Edit" asp-route-id="@item.IdSinhVien" class="my-1 btn btn-sm btn-outline-info"><i class="far fa-edit"></i> Cập nhập</a>
+                    <a asp-action="Details"  class="btn btn-sm btn-outline-dark my-1" asp-route-id="@item.IdSinhVien"><i class="far fa-file-alt"></i> Chi tiết</a>
+                    <a asp-action="Delete" class="btn btn-sm btn-outline-danger my-1" asp-route-id="@item.IdSinhVien"><i class="far fa-trash-alt"></i> Xoá</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+    @*<ul class="pagination">*@
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @{
+                int numberPage = ViewBag.numberPage;
+                int pageCurrent = ViewBag.pageCurrent;
+                int offset = 2;//number display page
+
+                //config FirstLink
+                if (pageCurrent > 1)
+                {
+                    int prevPage = pageCurrent - 1;
+                    var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous" asp-controller="SinhVien" asp-action="Index" asp-all-route-data="PrevLink">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @*<li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="PrevLink">Prev Link</a></li>*@
+                }
+
+                int from = pageCurrent - offset;
+                int to = pageCurrent + offset;
+                if (from <= 0)
+                {
+                    from = 1;
+                    to = offset * 2;
+                }
+
+
+                if (to > numberPage)
+                {
+                    to = numberPage;
+                }
+
+                int i;
+                for (i = from; i <= to; i++)
+                {
+                    var parms = new Dictionary<string, string>
+                                        {
+                { "page",i.ToString()}
+            };
+                    if (pageCurrent == i)
+                    {
+                        <li class="page-item active"><a class="page-link" asp-controller="SinhVien" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                        @*<li class="active"><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="parms">@i</a></li>*@
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" asp-controller="SinhVien" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                        @*<li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="parms">@i</a></li>*@
+                    }
+
+                }
+
+                if (pageCurrent < numberPage)
+                {
+                    int nextPage = pageCurrent + 1;
+                    var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="SinhVien" asp-action="Index" asp-all-route-data="NextLink" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    @*<li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="NextLink">Next Link</a></li>*@
+                }
+
+                if (pageCurrent < numberPage - (to / 2))
+                {
+                    var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="SinhVien" asp-action="Index" asp-all-route-data="LastLink">
+                            <span aria-hidden="true">&#8921;</span>
+                        </a>
+                    </li>
+                    @*<li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="LastLink">Last Link</a></li>*@
+                }
+            }
+
+        </ul>
+    </nav>
+    @*</ul>*@
+

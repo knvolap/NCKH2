@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ProjectA.ViewModel.HocBongViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["Active"] = "HB";
+}
+
+<h3>Học Bổng</h3>
+
+<p>
+    <a class="btn btn-outline-primary my-3" asp-action="Create"><i class="fas fa-plus"></i> Create New</a>
+</p>
+<div class="table-responsive">
+    <table class="table align-middle table-bordered">
+        <thead class="table-dark table align-middle">
+            <tr class="align-middle">
+                <th >
+                    @Html.DisplayNameFor(model => model.TenHb)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdHocBong)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenLhb)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoiDungHb)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DoiTuongApDung)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayBatDau)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayKetThuc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KinhPhi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoLuong)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayDuKienPhatHb)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenHb)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdHocBong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenLhb)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoiDungHb)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DoiTuongApDung)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayBatDau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayKetThuc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KinhPhi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoLuong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayDuKienPhatHb)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" class="btn btn-sm btn-outline-info my-1" asp-route-id="@item.IdHocBong"><i class="far fa-edit"></i> Cập nhập</a> 
+                        <a asp-action="Details" class="btn btn-sm btn-outline-dark my-1" asp-route-id="@item.IdHocBong"><i class="far fa-file-alt"></i> Chi tiết</a> 
+                        <a asp-action="Delete" class="btn btn-sm btn-outline-danger my-1" asp-route-id="@item.IdHocBong"><i class="far fa-trash-alt"></i> Xoá</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

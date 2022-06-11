@@ -1,0 +1,183 @@
+﻿@model IEnumerable<ProjectA.ViewModel.XetHocBongViewModel>
+@{Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Active"] = "XHB";}
+
+<h2>Danh sách đạt được học bổng</h2>
+<table class="table table-striped table-bordered table-white">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.IdSinhVien)</th>
+            <th>@Html.DisplayNameFor(model => model.TenSinhVien)</th>
+            <th>@Html.DisplayNameFor(model => model.IdLop)</th>
+            <th>@Html.DisplayNameFor(model => model.IdHocKy)</th>
+            <th>@Html.DisplayNameFor(model => model.DiemThang4)</th>
+            <th>@Html.DisplayNameFor(model => model.DiemThang10)</th>
+            <th>@Html.DisplayNameFor(model => model.SoTinChi)</th>
+            <th>@Html.DisplayNameFor(model => model.XepLoai)</th>
+            <th>@Html.DisplayNameFor(model => model.SoTien)</th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdSinhVien</td>
+                <td>@item.TenSinhVien</td>
+                <td>@item.IdLop</td>
+                <td>@item.IdHocKy</td>
+                <td>@item.DiemThang4</td>
+                <td>@item.DiemThang10</td>
+                <td>@item.SoTinChi</td>
+                <td>@item.XepLoai</td>
+                <td>@item.SoTien</td>
+                @*<th>
+                        <a asp-action="Edit" asp-route-id="@item.IdSinhVien">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdSinhVien">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdSinhVien">Delete</a>
+                    </th>*@
+            </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @{
+            int numberPage = ViewBag.numberPage;
+            int pageCurrent = ViewBag.pageCurrent;
+            int offset = 2;//number display page
+            if (pageCurrent > 1)
+            {
+                int prevPage = pageCurrent - 1;
+                var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+                @*<li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="PrevLink">Prev Link</a></li>*@
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="PrevLink">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            int from = pageCurrent - offset;
+            int to = pageCurrent + offset;
+            if (from <= 0)
+            {
+                from = 1;
+                to = offset * 2;
+            }
+
+
+            if (to > numberPage)
+            {
+                to = numberPage;
+            }
+
+            int i;
+            for (i = from; i <= to; i++)
+            {
+                var parms = new Dictionary<string, string>
+                {
+                        { "page",i.ToString()}
+                    };
+                if (pageCurrent == i)
+                {
+                    <li class="page-item active"><a class="page-link" asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                    @*<li class="active"><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="parms">@i</a></li>*@
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                    @*<li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="parms">@i</a></li>*@
+                }
+
+            }
+
+            if (pageCurrent < numberPage)
+            {
+                int nextPage = pageCurrent + 1;
+                var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+                @*<li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="NextLink">Next Link</a></li>*@
+                <li class="page-item">
+                    <a class="page-link" asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="NextLink" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+
+            if (pageCurrent < numberPage - (to / 2))
+            {
+                var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+                <li class="page-item">
+                    <a class="page-link" asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="LastLink">
+                        <span aria-hidden="true">&#8921;</span>
+                    </a>
+                </li>
+                @*<li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="LastLink">Last Link</a></li>*@
+            }
+
+        }
+
+    </ul>
+</nav>
+@*<ul class="pagination">
+    @{
+        int numberPage = ViewBag.numberPage;
+        int pageCurrent = ViewBag.pageCurrent;
+        int offset = 2;//number display page
+
+
+        //config FirstLink
+        if (pageCurrent > 1)
+        {
+            int prevPage = pageCurrent - 1;
+            var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+            <li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="PrevLink">Prev Link</a></li>
+        }
+
+        int from = pageCurrent - offset;
+        int to = pageCurrent + offset;
+        if (from <= 0)
+        {
+            from = 1;
+            to = offset * 2;
+        }
+
+
+        if (to > numberPage)
+        {
+            to = numberPage;
+        }
+
+        int i;
+        for (i = from; i <= to; i++)
+        {
+            var parms = new Dictionary<string, string>
+                {
+                        { "page",i.ToString()}
+                    };
+            if (pageCurrent == i)
+            {
+                <li class="active"><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+            }
+            else
+            {
+                <li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+            }
+
+        }
+
+        if (pageCurrent < numberPage - (to / 2))
+        {
+            <li><a>...</a></li>
+            var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+            <li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="LastLink">Last Link</a></li>
+        }
+
+        if (pageCurrent < numberPage)
+        {
+            int nextPage = pageCurrent + 1;
+            var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+            <li><a asp-controller="XetHocBong" asp-action="Index" asp-all-route-data="NextLink">Next Link</a></li>
+        }
+    }
+</ul>*@
+

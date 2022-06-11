@@ -1,0 +1,78 @@
+﻿@model ProjectA.ViewModel.HocBongViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Chi Tiết</h1>
+
+<div>
+    <h4>Học Bổng</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdHocBong)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdHocBong)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TenHb)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenHb)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TenLhb)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenLhb)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NoiDungHb)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NoiDungHb)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DoiTuongApDung)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DoiTuongApDung)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayBatDau)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayKetThuc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KinhPhi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KinhPhi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayDuKienPhatHb)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayDuKienPhatHb)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-outline-primary"><i class="fas fa-long-arrow-alt-left"></i> Trở lại trang trước</a>
+    <a asp-action="Edit" class="btn btn-outline-success" asp-route-id="@Model.IdHocBong"><i class="far fa-edit"></i>  Cập nhật</a>
+</div>

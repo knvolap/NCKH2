@@ -1,0 +1,70 @@
+﻿@model ProjectA.Models.Diem
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Thêm sinh viên</h2>
+
+<a class="btn btn-outline-info" asp-action="CreateNewSinhVien" asp-controller="SinhVien"><i class="fas fa-plus"></i> Tạo sinh viên mới</a>
+<hr />
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdSinhVien" class="control-label"></label>
+                <select asp-for="IdSinhVien" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.SinhViens,"IdSinhVien","IdSinhVien"))">
+                </select>
+                <span asp-validation-for="IdSinhVien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdHocKy" class="control-label"></label>
+                <select asp-for="IdHocKy" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.HocKies,"IdHocKy","IdHocKy"))">
+                </select>
+                <span asp-validation-for="IdHocKy" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DiemThang10" class="control-label"></label>
+                <input asp-for="DiemThang10" class="form-control" />
+                <span asp-validation-for="DiemThang10" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiemThang4" class="control-label"></label>
+                <input asp-for="DiemThang4" class="form-control" />
+                <span asp-validation-for="DiemThang4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="DiemRenLuyen" class="control-label"></label>
+                <input asp-for="DiemRenLuyen" class="form-control" />
+                <span asp-validation-for="DiemRenLuyen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="XepLoai" class="control-label"></label>
+                <input asp-for="XepLoai" class="form-control" />
+                <span asp-validation-for="XepLoai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoTinChi" class="control-label"></label>
+                <input asp-for="SoTinChi" class="form-control" />
+                <span asp-validation-for="SoTinChi" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group mt-2">
+        @*<input type="submit" value="Thêm" class="btn btn-primary" />*@
+        <button class="btn btn-outline-success" type="submit"><i class="fas fa-plus"></i> Thêm</button>
+    </div>
+</form>
+    <div class="mt-4">
+        <a class="btn btn-outline-primary" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Quay lại trang trước</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

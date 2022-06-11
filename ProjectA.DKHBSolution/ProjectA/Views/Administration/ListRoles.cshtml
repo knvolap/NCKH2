@@ -1,0 +1,53 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewBag.Title = "All Roles";
+    ViewData["Active"] = "Lrole";
+}
+
+<h2>Danh Sách Phân Quyền</h2>
+
+@if (Model.Any())
+{
+    <a class="btn btn-outline-primary my-3" style="width:auto" asp-action="CreateRole"
+       asp-controller="administration">Thêm một quyền</a>
+
+    foreach (var role in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id : @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+            </div>
+            <div class="card-footer">
+                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                    <a class="btn btn-outline-success" asp-action="EditRole"
+                       asp-controller="Administration" asp-route-id="@role.Id">Cập nhật</a>               
+                    <button type="submit" class="btn btn-outline-danger"
+                            onclick="return confirm('Bạn chắc chắn muốn xóa quyền này: @role.Name')">
+                        Xoá
+                    </button>
+                </form>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No roles created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a role
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="administration" asp-action="CreateRole">
+                Create Role
+            </a>
+        </div>
+    </div>
+}

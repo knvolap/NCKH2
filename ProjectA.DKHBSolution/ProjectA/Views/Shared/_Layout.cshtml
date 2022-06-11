@@ -1,0 +1,202 @@
+﻿@inject SignInManager<ApplicationUser> signInManager;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProjectA</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <style>
+        @@media (min-width: 1200px) {
+            .container {
+                max-width: 1200px !important;
+            }
+        }
+
+        .header-nav li a:hover, .header-nav li a:focus, .header-nav button:hover, .header-nav button:focus {
+            color: #0094ff !important;
+        }
+
+        .list-left a:hover, .list-left a:focus {
+            z-index: 1;
+            color: #fff;
+            border-color: #007bff;
+            text-decoration: none;
+            background-color: #007bff;
+        }
+
+        .user-name:hover, .user-name:focus {
+            color: #fff !important;
+            text-decoration: none !important;
+            background-color: transparent !important;
+        }
+
+        .list-btn a {
+            padding: 3px 4px !important;
+            margin: 2px 0 !important;
+        }
+
+        .table td, .table th {
+            padding: 6px !important;
+        }
+
+        .table th {
+            text-align: center !important;
+        }
+
+        .fill {
+            padding: 15px;
+        }
+
+        .list-group-item {
+            color: #2C5282;
+            font-weight: bold;
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+            .list-group-item i {
+                display: inline-flex;
+                width: 30px;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+        @@media (min-width: 768px) {
+            .fill {
+                min-height: calc( 100vh - 117px );
+                /*            height: 100%;*/
+                padding: 15px;
+                background-color: #edf2f7;
+            }
+
+            .list-left {
+                position: sticky;
+                top: 15px;
+            }
+        }
+
+        @@media (min-width: 992px) {
+            .fill {
+                -ms-flex: 0 0 20%;
+                flex: 0 0 20%;
+                max-width: 20%;
+            }
+
+            .main {
+                -ms-flex: 0 0 80%;
+                flex: 0 0 80%;
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HocBongUTE</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end header-nav">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link text-light user-name">Xin chào @User.Identity.Name</a>
+                            </li>
+                            <li class="nav-item d-flex align-items-center">
+                                <form class="d-flex align-items-center" method="post" asp-action="logout" asp-controller="account">
+                                    <button type="submit" class="nav-link btn btn-link py-0 text-light">
+                                        Đăng Xuất
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Đăng Ký</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Đăng Nhập</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 fill">
+
+                <div class="list-group list-left">
+                    <a id="HB" asp-area="" asp-controller="HocBong" asp-action="Index" class="list-group-item list-group-item-action" aria-current="true">
+
+                        <i class="fas fa-award"></i>
+                        Học Bổng
+                    </a>
+                    <a id="SV" asp-area="" asp-controller="SinhVien" asp-action="Index" class="list-group-item list-group-item-action">
+                        <i class="fas fa-graduation-cap"></i>
+                        Sinh Viên
+                    </a>
+                    <a id="XHB" asp-area="" asp-controller="XetHocBong" asp-action="Index" class="list-group-item list-group-item-action">
+
+                        <i class="far fa-list-alt"></i>
+                        Danh sách học bổng
+                    </a>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="list-group-item list-group-item-action"> <i class="fas fa-grip-lines"></i>Quản lý</a>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <div class="list-group">
+                                    <a id="Luser" class="list-group-item list-group-item-action" asp-controller="Administration"
+                                       asp-action="ListUsers">
+                                        <i class="fas fa-user-tie"></i>
+                                        Quản trị viên
+                                    </a>
+                                    <a id="Lrole" class="list-group-item list-group-item-action" asp-controller="Administration"
+                                       asp-action="ListRoles">
+                                        <i class="fas fa-user"></i>Phân quyền
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+
+            </div>
+            <main role="main" class="pb-3 col-md-8 main mt-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted bg-dark">
+        <div class="container-fluid text-light">
+            &copy; 2021 - ProjectA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    @if (ViewData["Active"] != null)
+    {
+        <script type="text/javascript">document.getElementById("@ViewData["Active"]").classList.add("active")</script>
+    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

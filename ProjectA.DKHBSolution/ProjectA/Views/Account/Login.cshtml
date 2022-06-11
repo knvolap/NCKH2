@@ -1,0 +1,226 @@
+﻿@model ProjectA.ViewModel.LoginViewModel
+
+@{
+    ViewBag.Title = "User Login";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+        :root {
+            --white-color: #fff;
+            --black-color: #000;
+            --text-color: #6F6868;
+            --border-color: #dbdbdb;
+            --primary-color: #428BCA;
+            --header-height: 80px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+            line-height: 1.6rem;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .bd_login .box {
+            background-color: #0093e9;
+            background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+            position: relative;
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+        }
+
+        .bd_login .login {
+            display: block;
+            margin: auto;
+            width: 500px;
+            max-width: 100%;
+            padding: 30px;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+            .bd_login .login h1 {
+                color: #2a4365;
+                margin-bottom: 30px;
+                font-size: 28px;
+            }
+
+            .bd_login .login input {
+                width: 100%;
+                margin: 15px 0;
+                font-size: 14px;
+                padding: 10px 15px;
+                /*                background-color: antiquewhite;*/
+                outline: none;
+                border: 2px solid #4299e1;
+            }
+
+                .bd_login .login input:focus {
+                    border: 2px solid #ff706d;
+                }
+
+            .bd_login .login label {
+                display: block;
+                text-align: left;
+                font-size: 14px;
+                margin-bottom: 0 !important;
+            }
+
+        .bd_login .action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .bd_login .forgot {
+            display: inline-block;
+            text-decoration: none;
+            color: #0093e9;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .bd_login .login button,
+        .bd_login .login .button {
+            width: 100%;
+            padding: 8px 16px;
+            display: block;
+            background-color: #2a4365;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            border: 2px solid #2a4365;
+            outline: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        body {
+            margin-bottom: 0 !important;
+        }
+
+        .bd_login .btn__signup {
+            display: block;
+            text-decoration: none;
+            margin-top: 30px;
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: #fff;
+            border-radius: 5px;
+            color: #2a4365;
+            border: 2px solid #2a4365;
+        }
+
+        .cbremember {
+            width: unset !important;
+            margin-right: 5px !important;
+        }
+
+        @@media (max-width: 440px) {
+            .bd_login .login {
+                padding: 15px;
+            }
+        }
+
+        @@media (max-width: 440px) {
+            .bd_login .login h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="bd_login">
+    <div class="box">
+        <div class="login">
+            <h1>Đăng Nhập Hệ Thống</h1>
+            <form action="" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <label asp-for="Email">Email address</label>
+                <input type="text" asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="Password">Mật Khẩu</label>
+                <input type="password" asp-for="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="RememberMe" class="d-flex align-items-center">
+                            <input asp-for="RememberMe" class="cbremember" />
+                            @*Nhớ mật khẩu*@
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="action">
+                    @*<a class="forgot" href="">Forgot password?</a>*@
+                    <button>Đăng Nhập</button>
+                    @*<a href="./index.html" class="button">Sign in</a>*@
+                </div>
+                @*<a asp-area="" asp-controller="Account" asp-action="Register" class="btn__signup">Đăng Ký</a>*@
+            </form>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+
+<!--<h2>Đăng Nhập Hệ Thống</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Mật khẩu</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="RememberMe">
+                        <input asp-for="RememberMe" />
+                        Nhớ mật khẩu-->
+@*@Html.DisplayNameFor(m => m.RememberMe)*@
+<!--</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+        </form>
+    </div>
+</div>-->
